@@ -5,9 +5,10 @@ export default defineConfig({
   test: {
     poolOptions: {
       forks: {
-        execArgv: ['--expose-gc'],
+        execArgv: ['--expose-gc', '-no-compilation-cache'],
       },
     },
+    setupFiles: ['./test/setup-msw.ts'],
   },
   plugins: [
     // This is required to build the test files with SWC
