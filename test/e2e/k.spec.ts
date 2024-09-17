@@ -1,7 +1,16 @@
-import * as request from 'supertest';
+import { describe, it, beforeAll, afterAll, afterEach } from 'vitest';
+import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { type NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from '../../src/app.module';
+import { server } from '../mock-server';
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => {
+  server.close();
+  global.gc();
+});
 
 describe('Root', () => {
   let app: NestExpressApplication;
